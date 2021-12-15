@@ -1,17 +1,31 @@
 <template>
     <div id="app">
-        <img alt="Vue logo" src="./assets/logo.png" />
-        <HelloWorld msg="Welcome to Your Vue.js App" />
+        <reservation-calendar
+            :price="price"
+            :votesAmount="votesAmount"
+            :availableRange="availableRange"
+            :unavailableRange="unavailableRange"
+            :selectedRange="selectedRange"
+        />
     </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import ReservationCalendar from '@/components/ReservationCalendar';
 
 export default {
     name: 'App',
     components: {
-        HelloWorld
+        ReservationCalendar
+    },
+    data() {
+        return {
+            price: 298,
+            votesAmount: 123,
+            availableRange: [],
+            unavailableRange: [],
+            selectedRange: []
+        };
     }
 };
 </script>
