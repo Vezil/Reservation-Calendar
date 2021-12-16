@@ -8,11 +8,43 @@
             <div @click="changeMonth(+1)"> &#62; </div>
         </div>
 
-        <div class="days-labels">
-            <span v-for="(day, index) in days" :key="index">
-                {{ day }}
-            </span>
-        </div>
+        <table class="table">
+            <tr>
+                <th v-for="(day, index) in days" :key="index"> {{ day }}</th>
+            </tr>
+            <tr>
+                <td
+                    v-for="(dayNumber, index) in monthDaysNumbers.slice(0, 7)"
+                    :key="index"
+                >
+                    {{ dayNumber }}
+                </td>
+            </tr>
+            <tr>
+                <td
+                    v-for="(dayNumber, index) in monthDaysNumbers.slice(7, 14)"
+                    :key="index"
+                >
+                    {{ dayNumber }}
+                </td>
+            </tr>
+            <tr>
+                <td
+                    v-for="(dayNumber, index) in monthDaysNumbers.slice(14, 21)"
+                    :key="index"
+                >
+                    {{ dayNumber }}
+                </td>
+            </tr>
+            <tr>
+                <td
+                    v-for="(dayNumber, index) in monthDaysNumbers.slice(21, 28)"
+                    :key="index"
+                >
+                    {{ dayNumber }}
+                </td>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -47,6 +79,33 @@ export default {
             default: () => []
         }
     },
+    computed: {
+        monthDaysNumbers() {
+            const monthDaysArray = [];
+
+            const monthNumber =
+                this.monthIndex + 1 < 10
+                    ? `0${this.monthIndex + 1}`
+                    : String(this.monthIndex + 1);
+
+            const daysInMonth = moment(
+                `2021-${monthNumber}`,
+                'YYYY-MM'
+            ).daysInMonth();
+
+            console.log(moment(`2021-${monthNumber}-01`).weekday());
+
+            if (!this.dateRange) {
+                return monthDaysArray;
+            }
+
+            for (const day of this.dateRange.by('day')) {
+                monthDaysArray.push(day.date());
+            }
+
+            return monthDaysArray.slice(0, daysInMonth);
+        }
+    },
     data() {
         return {
             months: [
@@ -63,19 +122,16 @@ export default {
                 'November',
                 'December'
             ],
-            days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'July', 'Sat'],
-            monthIndex: 0
+            days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            monthIndex: 0,
+            dateRange: null
         };
     },
     mounted() {
         const start = moment('2021-01-01', 'YYYY-MM-DD');
         const end = moment('2021-12-31', 'YYYY-MM-DD');
 
-        const range = moment.range(start, end);
-
-        for (const day of range.by('day')) {
-            console.log(day.format('YYYY-MM-DD'));
-        }
+        this.dateRange = moment.range(start, end);
     },
     methods: {
         changeMonth(value) {
@@ -101,5 +157,14 @@ export default {
 
 .month-switch > div {
     margin: 20px;
+}
+
+.table {
+    margin: auto;
+}
+
+table > tr,
+td {
+    padding: 10px;
 }
 </style>
