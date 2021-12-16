@@ -1,5 +1,19 @@
 <template>
-    <div class="reservation-calendar"> </div>
+    <div class="reservation-calendar">
+        <div class="price">{{ price }}zł</div>
+
+        <div class="month-switch">
+            <div @click="changeMonth(-1)"> &#60;</div>
+            <div>{{ months[monthIndex] }} 2021</div>
+            <div @click="changeMonth(+1)"> &#62; </div>
+        </div>
+
+        <div class="days-labels">
+            <span v-for="(day, index) in days" :key="index">
+                {{ day }}
+            </span>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -33,6 +47,26 @@ export default {
             default: () => []
         }
     },
+    data() {
+        return {
+            months: [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+            ],
+            days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'July', 'Sat'],
+            monthIndex: 0
+        };
+    },
     mounted() {
         const start = moment('2021-01-01', 'YYYY-MM-DD');
         const end = moment('2021-12-31', 'YYYY-MM-DD');
@@ -42,6 +76,30 @@ export default {
         for (const day of range.by('day')) {
             console.log(day.format('YYYY-MM-DD'));
         }
+    },
+    methods: {
+        changeMonth(value) {
+            this.monthIndex += value;
+
+            if (this.monthIndex <= 0) {
+                this.monthIndex = 0;
+            }
+
+            if (this.monthIndex >= 11) {
+                this.monthIndex = 11;
+            }
+        }
     }
 };
 </script>
+
+<style scoped>
+.month-switch {
+    display: flex;
+    justify-content: center;
+}
+
+.month-switch > div {
+    margin: 20px;
+}
+</style>
