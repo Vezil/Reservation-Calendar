@@ -14,7 +14,7 @@
             </tr>
             <tr>
                 <td
-                    v-for="(dayNumber, index) in monthDaysNumbers.slice(0, 7)"
+                    v-for="(dayNumber, index) in daysToShow.slice(0, 7)"
                     :key="index"
                 >
                     {{ dayNumber }}
@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <td
-                    v-for="(dayNumber, index) in monthDaysNumbers.slice(7, 14)"
+                    v-for="(dayNumber, index) in daysToShow.slice(7, 14)"
                     :key="index"
                 >
                     {{ dayNumber }}
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td
-                    v-for="(dayNumber, index) in monthDaysNumbers.slice(14, 21)"
+                    v-for="(dayNumber, index) in daysToShow.slice(14, 21)"
                     :key="index"
                 >
                     {{ dayNumber }}
@@ -38,7 +38,23 @@
             </tr>
             <tr>
                 <td
-                    v-for="(dayNumber, index) in monthDaysNumbers.slice(21, 28)"
+                    v-for="(dayNumber, index) in daysToShow.slice(21, 28)"
+                    :key="index"
+                >
+                    {{ dayNumber }}
+                </td>
+            </tr>
+            <tr>
+                <td
+                    v-for="(dayNumber, index) in daysToShow.slice(28, 35)"
+                    :key="index"
+                >
+                    {{ dayNumber }}
+                </td>
+            </tr>
+            <tr>
+                <td
+                    v-for="(dayNumber, index) in daysToShow.slice(35, 42)"
                     :key="index"
                 >
                     {{ dayNumber }}
@@ -80,30 +96,38 @@ export default {
         }
     },
     computed: {
-        monthDaysNumbers() {
-            const monthDaysArray = [];
+        daysToShow() {
+            const daysToShowArray = [];
 
-            const monthNumber =
-                this.monthIndex + 1 < 10
-                    ? `0${this.monthIndex + 1}`
-                    : String(this.monthIndex + 1);
+            const previousMonthNumber =
+                this.monthIndex < 10
+                    ? this.monthIndex === 0
+                        ? `01`
+                        : `0${this.monthIndex}`
+                    : String(this.monthIndex);
 
-            const daysInMonth = moment(
-                `2021-${monthNumber}`,
+            const daysInPreviousMonth = moment(
+                `2021-${previousMonthNumber}`,
                 'YYYY-MM'
             ).daysInMonth();
 
-            console.log(moment(`2021-${monthNumber}-01`).weekday());
+            const firstWeekdayOfMonth = moment(
+                `2021-${previousMonthNumber}-01`
+            ).weekday();
 
             if (!this.dateRange) {
-                return monthDaysArray;
+                return daysToShowArray;
             }
 
             for (const day of this.dateRange.by('day')) {
-                monthDaysArray.push(day.date());
+                daysToShowArray.push(day.date());
             }
 
-            return monthDaysArray.slice(0, daysInMonth);
+            for (let i = 0; i < firstWeekdayOfMonth; i++) {
+                daysToShowArray.unshift(daysInPreviousMonth - i);
+            }
+
+            return daysToShowArray.slice(0, 42);
         }
     },
     data() {
