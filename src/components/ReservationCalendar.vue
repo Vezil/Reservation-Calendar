@@ -12,50 +12,13 @@
             <tr>
                 <th v-for="(day, index) in days" :key="index"> {{ day }}</th>
             </tr>
-            <tr>
+            <tr v-for="index in 6" :key="index">
                 <td
-                    v-for="(dayNumber, index) in daysToShow.slice(0, 7)"
-                    :key="index"
-                >
-                    {{ dayNumber }}
-                </td>
-            </tr>
-            <tr>
-                <td
-                    v-for="(dayNumber, index) in daysToShow.slice(7, 14)"
-                    :key="index"
-                >
-                    {{ dayNumber }}
-                </td>
-            </tr>
-            <tr>
-                <td
-                    v-for="(dayNumber, index) in daysToShow.slice(14, 21)"
-                    :key="index"
-                >
-                    {{ dayNumber }}
-                </td>
-            </tr>
-            <tr>
-                <td
-                    v-for="(dayNumber, index) in daysToShow.slice(21, 28)"
-                    :key="index"
-                >
-                    {{ dayNumber }}
-                </td>
-            </tr>
-            <tr>
-                <td
-                    v-for="(dayNumber, index) in daysToShow.slice(28, 35)"
-                    :key="index"
-                >
-                    {{ dayNumber }}
-                </td>
-            </tr>
-            <tr>
-                <td
-                    v-for="(dayNumber, index) in daysToShow.slice(35, 42)"
-                    :key="index"
+                    v-for="(dayNumber, dayNumberIndex) in daysToShow.slice(
+                        (index - 1) * 7,
+                        (index - 1) * 7 + 7
+                    )"
+                    :key="dayNumberIndex"
                 >
                     {{ dayNumber }}
                 </td>
@@ -103,8 +66,8 @@ export default {
                 this.monthIndex < 10
                     ? this.monthIndex === 0
                         ? `01`
-                        : `0${this.monthIndex}`
-                    : String(this.monthIndex);
+                        : `0${this.monthIndex + 1}`
+                    : String(this.monthIndex + 1);
 
             const daysInPreviousMonth = moment(
                 `2021-${previousMonthNumber}`,
@@ -187,8 +150,12 @@ export default {
     margin: auto;
 }
 
-table > tr,
+tr,
 td {
     padding: 10px;
+}
+
+td {
+    cursor: pointer;
 }
 </style>
