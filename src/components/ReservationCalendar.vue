@@ -20,11 +20,12 @@
                     )"
                     :key="dayNumberIndex"
                     @click="selectDate(dayObject)"
-                    :class="
-                        dayObject.available && isSelected(dayObject)
-                            ? 'selected-day'
-                            : ''
-                    "
+                    :class="{
+                        'selected-day':
+                            dayObject.available && isSelected(dayObject),
+                        today:
+                            dayObject.available && dayObject.dayNumber === today
+                    }"
                 >
                     {{ dayObject.dayNumber }}
                 </td>
@@ -115,6 +116,9 @@ export default {
             }
 
             return daysToShowArray;
+        },
+        today() {
+            return parseInt(moment().format('DD'));
         }
     },
     data() {
@@ -212,5 +216,10 @@ td {
 
 .selected-day {
     background-color: green;
+}
+
+.today {
+    border: 2px solid greenyellow;
+    border-radius: 25px;
 }
 </style>
