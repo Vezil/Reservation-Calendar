@@ -14,13 +14,19 @@
             </tr>
             <tr v-for="index in 6" :key="index">
                 <td
-                    v-for="(dayNumber, dayNumberIndex) in daysToShow.slice(
-                        (index - 1) * 7,
-                        (index - 1) * 7 + 7
+                    v-for="(dayObject, dayNumberIndex) in daysToShow.slice(
+                        (index - 1) * numOfColumns,
+                        (index - 1) * numOfColumns + numOfColumns
                     )"
                     :key="dayNumberIndex"
+                    @click="selectDate(dayObject)"
+                    :class="
+                        dayObject.available && isSelected(dayObject)
+                            ? 'selected-day'
+                            : ''
+                    "
                 >
-                    {{ dayNumber }}
+                    {{ dayObject.dayNumber }}
                 </td>
             </tr>
         </table>
@@ -60,7 +66,7 @@ export default {
     },
     computed: {
         daysToShow() {
-            const daysToShowArray = [];
+            let daysToShowArray = [];
 
             const previousMonthNumber =
                 this.monthIndex < 10
@@ -83,14 +89,32 @@ export default {
             }
 
             for (const day of this.dateRange.by('day')) {
-                daysToShowArray.push(day.date());
+                daysToShowArray.push({
+                    dayNumber: day.date(),
+                    available: true
+                });
             }
 
             for (let i = 0; i < firstWeekdayOfMonth; i++) {
-                daysToShowArray.unshift(daysInPreviousMonth - i);
+                daysToShowArray.unshift({
+                    dayNumber: daysInPreviousMonth - i,
+                    available: false
+                });
             }
 
-            return daysToShowArray.slice(0, 42);
+            daysToShowArray = daysToShowArray.slice(0, 42);
+
+            let i = daysToShowArray.length - 1;
+
+            while (
+                daysToShowArray[i - 1].dayNumber < daysToShowArray[i].dayNumber
+            ) {
+                daysToShowArray[i].available = false;
+                daysToShowArray[i - 1].available = false;
+                i--;
+            }
+
+            return daysToShowArray;
         }
     },
     data() {
@@ -111,7 +135,10 @@ export default {
             ],
             days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             monthIndex: 0,
-            dateRange: null
+            dateRange: null,
+            dateFirstSelectedIndex: 0,
+            dateSecondSelectedIndex: 0,
+            numOfColumns: 7
         };
     },
     mounted() {
@@ -131,6 +158,30 @@ export default {
             if (this.monthIndex >= 11) {
                 this.monthIndex = 11;
             }
+        },
+        selectDate(dayNumber) {
+            const index = this.daysToShow.findIndex(
+                (day) => day === dayNumber && dayNumber.available
+            );
+
+            this.dateSecondSelectedIndex = this.dateFirstSelectedIndex;
+            this.dateFirstSelectedIndex = index;
+        },
+        isSelected(dayObject) {
+            if (
+                this.dateFirstSelectedIndex === -1 ||
+                this.dateSecondSelectedIndex === -1
+            ) {
+                return false;
+            }
+
+            const isSelected =
+                this.daysToShow[this.dateFirstSelectedIndex].dayNumber ===
+                    dayObject.dayNumber ||
+                this.daysToShow[this.dateSecondSelectedIndex].dayNumber ===
+                    dayObject.dayNumber;
+
+            return isSelected;
         }
     }
 };
@@ -157,5 +208,9 @@ td {
 
 td {
     cursor: pointer;
+}
+
+.selected-day {
+    background-color: green;
 }
 </style>
