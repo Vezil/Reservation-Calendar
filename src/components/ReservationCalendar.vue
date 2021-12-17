@@ -24,7 +24,9 @@
                         'selected-day':
                             dayObject.available && isSelected(dayObject),
                         today:
-                            dayObject.available && dayObject.dayNumber === today
+                            dayObject.available &&
+                            dayObject.dayNumber === today,
+                        'in-range': isInRange(dayObject)
                     }"
                 >
                     {{ dayObject.dayNumber }}
@@ -140,8 +142,8 @@ export default {
             days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             monthIndex: 0,
             dateRange: null,
-            dateFirstSelectedIndex: 0,
-            dateSecondSelectedIndex: 0,
+            dateFirstSelectedIndex: 16,
+            dateSecondSelectedIndex: 24,
             numOfColumns: 7
         };
     },
@@ -168,6 +170,10 @@ export default {
                 (day) => day === dayNumber && dayNumber.available
             );
 
+            if (!~index) {
+                return;
+            }
+
             this.dateSecondSelectedIndex = this.dateFirstSelectedIndex;
             this.dateFirstSelectedIndex = index;
         },
@@ -186,6 +192,24 @@ export default {
                     dayObject.dayNumber;
 
             return isSelected;
+        },
+        isInRange({ dayNumber, available }) {
+            if (!available) {
+                return false;
+            }
+
+            const isInRange =
+                this.dateFirstSelectedIndex > this.dateSecondSelectedIndex
+                    ? this.daysToShow[this.dateFirstSelectedIndex].dayNumber >
+                          dayNumber &&
+                      this.daysToShow[this.dateSecondSelectedIndex].dayNumber <
+                          dayNumber
+                    : this.daysToShow[this.dateFirstSelectedIndex].dayNumber <
+                          dayNumber &&
+                      this.daysToShow[this.dateSecondSelectedIndex].dayNumber >
+                          dayNumber;
+
+            return isInRange;
         }
     }
 };
@@ -221,5 +245,9 @@ td {
 .today {
     border: 2px solid greenyellow;
     border-radius: 25px;
+}
+
+.in-range {
+    background-color: greenyellow;
 }
 </style>
