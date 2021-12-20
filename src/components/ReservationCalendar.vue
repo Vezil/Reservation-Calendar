@@ -9,24 +9,34 @@
         </div>
 
         <div class="selected-interval">
-            <div v-if="daysToShow[dateFirstSelectedIndex]">
+            <div>
                 {{
-                    formattedInterval(
-                        daysToShow[dateFirstSelectedIndex].dayNumber
-                    )
+                    dateFirstSelectedIndex === -1 ||
+                    !daysToShow[dateFirstSelectedIndex]
+                        ? '-'
+                        : formattedInterval(
+                              daysToShow[dateFirstSelectedIndex].dayNumber
+                          )
                 }}
 
-                <div @click="cancelInterval()">x</div>
+                <div class="close-button" @click="cancelInterval('first')">
+                    x
+                </div>
             </div>
             <div class="arrow">&rarr;</div>
-            <div v-if="daysToShow[dateSecondSelectedIndex]">
+            <div>
                 {{
-                    formattedInterval(
-                        daysToShow[dateSecondSelectedIndex].dayNumber
-                    )
+                    dateSecondSelectedIndex === -1 ||
+                    !daysToShow[dateSecondSelectedIndex]
+                        ? '-'
+                        : formattedInterval(
+                              daysToShow[dateSecondSelectedIndex].dayNumber
+                          )
                 }}
 
-                <div @click="cancelInterval()">x</div>
+                <div class="close-button" @click="cancelInterval('second')">
+                    x
+                </div>
             </div>
         </div>
 
@@ -201,17 +211,17 @@ export default {
         },
         isSelected(dayObject) {
             if (
-                this.dateFirstSelectedIndex === -1 ||
+                this.dateFirstSelectedIndex === -1 &&
                 this.dateSecondSelectedIndex === -1
             ) {
                 return false;
             }
 
             const isSelected =
-                this.daysToShow[this.dateFirstSelectedIndex].dayNumber ===
-                    dayObject.dayNumber ||
-                this.daysToShow[this.dateSecondSelectedIndex].dayNumber ===
-                    dayObject.dayNumber;
+                this.daysToShow[this.dateFirstSelectedIndex]?.dayNumber ===
+                    dayObject?.dayNumber ||
+                this.daysToShow[this.dateSecondSelectedIndex]?.dayNumber ===
+                    dayObject?.dayNumber;
 
             return isSelected;
         },
@@ -222,13 +232,13 @@ export default {
 
             const isInRange =
                 this.dateFirstSelectedIndex > this.dateSecondSelectedIndex
-                    ? this.daysToShow[this.dateFirstSelectedIndex].dayNumber >
+                    ? this.daysToShow[this.dateFirstSelectedIndex]?.dayNumber >
                           dayNumber &&
-                      this.daysToShow[this.dateSecondSelectedIndex].dayNumber <
+                      this.daysToShow[this.dateSecondSelectedIndex]?.dayNumber <
                           dayNumber
-                    : this.daysToShow[this.dateFirstSelectedIndex].dayNumber <
+                    : this.daysToShow[this.dateFirstSelectedIndex]?.dayNumber <
                           dayNumber &&
-                      this.daysToShow[this.dateSecondSelectedIndex].dayNumber >
+                      this.daysToShow[this.dateSecondSelectedIndex]?.dayNumber >
                           dayNumber;
 
             return isInRange;
@@ -238,8 +248,12 @@ export default {
 
             return moment(selectedDate).format('ll').replace(',', '');
         },
-        cancelInterval() {
-            ///
+        cancelInterval(indexType) {
+            if (indexType === 'first') {
+                this.dateFirstSelectedIndex = -1;
+            }
+
+            this.dateSecondSelectedIndex = -1;
         }
     }
 };
@@ -288,10 +302,18 @@ td {
 
 .selected-interval > div {
     padding: 10px;
+    display: flex;
 }
 .arrow {
     font-size: 20px;
     text-align: center;
     padding-top: 5px !important;
+}
+
+.close-button {
+    margin-left: 15px;
+    cursor: pointer;
+    color: gray;
+    font-weight: 500;
 }
 </style>
