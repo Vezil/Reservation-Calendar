@@ -8,6 +8,28 @@
             <div @click="changeMonth(+1)"> &#62; </div>
         </div>
 
+        <div class="selected-interval">
+            <div v-if="daysToShow[dateFirstSelectedIndex]">
+                {{
+                    formattedInterval(
+                        daysToShow[dateFirstSelectedIndex].dayNumber
+                    )
+                }}
+
+                <div @click="cancelInterval()">x</div>
+            </div>
+            <div class="arrow">&rarr;</div>
+            <div v-if="daysToShow[dateSecondSelectedIndex]">
+                {{
+                    formattedInterval(
+                        daysToShow[dateSecondSelectedIndex].dayNumber
+                    )
+                }}
+
+                <div @click="cancelInterval()">x</div>
+            </div>
+        </div>
+
         <table class="table">
             <tr>
                 <th v-for="(day, index) in days" :key="index"> {{ day }}</th>
@@ -210,6 +232,14 @@ export default {
                           dayNumber;
 
             return isInRange;
+        },
+        formattedInterval(day) {
+            const selectedDate = `${day}/${this.months[this.monthIndex]}/2021`;
+
+            return moment(selectedDate).format('ll').replace(',', '');
+        },
+        cancelInterval() {
+            ///
         }
     }
 };
@@ -249,5 +279,19 @@ td {
 
 .in-range {
     background-color: greenyellow;
+}
+
+.selected-interval {
+    display: flex;
+    justify-content: center;
+}
+
+.selected-interval > div {
+    padding: 10px;
+}
+.arrow {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 5px !important;
 }
 </style>
