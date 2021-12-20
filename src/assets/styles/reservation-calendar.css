@@ -1,0 +1,78 @@
+.reservation-calendar {
+    /*  */
+}
+.month-switch {
+    display: flex;
+    justify-content: center;
+}
+
+.month-switch > div {
+    margin: 20px;
+}
+
+.table {
+    margin: auto;
+
+    /* -webkit-box-shadow: -9px 5px 89px -23px rgba(66, 68, 90, 1);
+    -moz-box-shadow: -9px 5px 89px -23px rgba(66, 68, 90, 1);
+    box-shadow: -9px 5px 89px -23px rgba(66, 68, 90, 1); */
+}
+
+tr,
+td {
+    padding: 10px;
+}
+
+td {
+    cursor: pointer;
+}
+
+.selected-day {
+    background-color: #4e9845;
+    color: white;
+    border-radius: 25px;
+}
+
+.today {
+    border: 2px solid #edf5ec;
+    border-radius: 25px;
+}
+
+.in-range {
+    background-color: #edf5ec;
+    border-radius: 25px;
+    color: #4e9845;
+}
+
+.selected-interval {
+    display: flex;
+    justify-content: center;
+    border-radius: 25px;
+}
+
+.selected-interval > div {
+    padding: 10px;
+    display: flex;
+}
+.arrow {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 5px !important;
+}
+
+.close-button {
+    margin-left: 15px;
+    cursor: pointer;
+    color: gray;
+    font-weight: 500;
+}
+
+.selected-interval > .to {
+    background-color: #edf5ec;
+    color: #4e9845;
+}
+
+.unavailable-day {
+    color: gray;
+    opacity: 0.5;
+}

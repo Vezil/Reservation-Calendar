@@ -9,7 +9,7 @@
         </div>
 
         <div class="selected-interval">
-            <div>
+            <div class="from">
                 {{
                     dateFirstSelectedIndex === -1 ||
                     !daysToShow[dateFirstSelectedIndex]
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="arrow">&rarr;</div>
-            <div>
+            <div class="to">
                 {{
                     dateSecondSelectedIndex === -1 ||
                     !daysToShow[dateSecondSelectedIndex]
@@ -40,31 +40,36 @@
             </div>
         </div>
 
-        <table class="table">
-            <tr>
-                <th v-for="(day, index) in days" :key="index"> {{ day }}</th>
-            </tr>
-            <tr v-for="index in 6" :key="index">
-                <td
-                    v-for="(dayObject, dayNumberIndex) in daysToShow.slice(
-                        (index - 1) * numOfColumns,
-                        (index - 1) * numOfColumns + numOfColumns
-                    )"
-                    :key="dayNumberIndex"
-                    @click="selectDate(dayObject)"
-                    :class="{
-                        'selected-day':
-                            dayObject.available && isSelected(dayObject),
-                        today:
-                            dayObject.available &&
-                            dayObject.dayNumber === today,
-                        'in-range': isInRange(dayObject)
-                    }"
-                >
-                    {{ dayObject.dayNumber }}
-                </td>
-            </tr>
-        </table>
+        <div class="calendar-body">
+            <table class="table">
+                <tr>
+                    <th v-for="(day, index) in days" :key="index">
+                        {{ day }}</th
+                    >
+                </tr>
+                <tr v-for="index in 6" :key="index">
+                    <td
+                        v-for="(dayObject, dayNumberIndex) in daysToShow.slice(
+                            (index - 1) * numOfColumns,
+                            (index - 1) * numOfColumns + numOfColumns
+                        )"
+                        :key="dayNumberIndex"
+                        @click="selectDate(dayObject)"
+                        :class="{
+                            'selected-day':
+                                dayObject.available && isSelected(dayObject),
+                            today:
+                                dayObject.available &&
+                                dayObject.dayNumber === today,
+                            'in-range': isInRange(dayObject),
+                            'unavailable-day': !dayObject.available
+                        }"
+                    >
+                        {{ dayObject.dayNumber }}
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -187,6 +192,9 @@ export default {
     },
     methods: {
         changeMonth(value) {
+            this.dateFirstSelectedIndex = -1;
+            this.dateSecondSelectedIndex = -1;
+
             this.monthIndex += value;
 
             if (this.monthIndex <= 0) {
@@ -259,61 +267,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.month-switch {
-    display: flex;
-    justify-content: center;
-}
-
-.month-switch > div {
-    margin: 20px;
-}
-
-.table {
-    margin: auto;
-}
-
-tr,
-td {
-    padding: 10px;
-}
-
-td {
-    cursor: pointer;
-}
-
-.selected-day {
-    background-color: green;
-}
-
-.today {
-    border: 2px solid greenyellow;
-    border-radius: 25px;
-}
-
-.in-range {
-    background-color: greenyellow;
-}
-
-.selected-interval {
-    display: flex;
-    justify-content: center;
-}
-
-.selected-interval > div {
-    padding: 10px;
-    display: flex;
-}
-.arrow {
-    font-size: 20px;
-    text-align: center;
-    padding-top: 5px !important;
-}
-
-.close-button {
-    margin-left: 15px;
-    cursor: pointer;
-    color: gray;
-    font-weight: 500;
-}
-</style>
+<style scoped src="@/assets/styles/reservation-calendar.css"></style>
