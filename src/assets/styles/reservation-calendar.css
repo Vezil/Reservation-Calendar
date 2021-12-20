@@ -1,9 +1,86 @@
 .reservation-calendar {
-    /*  */
+    width: 24rem;
+    margin: auto;
 }
+
+.calendar-head {
+    width: 22rem;
+    margin: auto;
+    border-radius: 20px;
+    padding: 20px;
+    z-index: 2;
+
+    -webkit-box-shadow: 3px 7px 100px -28px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 3px 7px 100px -28px rgba(66, 68, 90, 1);
+    box-shadow: 3px 7px 100px -28px rgba(66, 68, 90, 1);
+}
+
+.calendar-body {
+    width: 20rem;
+    margin: auto;
+    border-radius: 20px;
+    padding: 20px;
+    z-index: 4;
+
+    -webkit-box-shadow: 1px -1px 100px -58px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 1px -1px 100px -58px rgba(66, 68, 90, 1);
+    box-shadow: 1px -1px 100px -58px rgba(66, 68, 90, 1);
+}
+
+.submit-values {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    font-size: 32px;
+    font-weight: 900;
+    margin: 2px;
+}
+
+.submit-button {
+    background-color: #4e9845;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    width: 100px;
+    padding-top: 15px;
+}
+
+.stars {
+    text-align: left;
+    margin: 10px;
+    width: 50%;
+}
+
+.selected-interval {
+    border: solid 1px rgba(0, 128, 0, 0.2);
+    text-align: center;
+    margin: auto;
+    width: 20rem;
+    padding: 4px;
+}
+
 .month-switch {
     display: flex;
     justify-content: center;
+    padding: 5px 10px 5px 10px;
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 2rem;
+    width: 18rem;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 700;
+}
+.selected-month {
+    /*  */
+}
+.change-month-arrow {
+    cursor: pointer;
 }
 
 .month-switch > div {
@@ -12,10 +89,6 @@
 
 .table {
     margin: auto;
-
-    /* -webkit-box-shadow: -9px 5px 89px -23px rgba(66, 68, 90, 1);
-    -moz-box-shadow: -9px 5px 89px -23px rgba(66, 68, 90, 1);
-    box-shadow: -9px 5px 89px -23px rgba(66, 68, 90, 1); */
 }
 
 tr,
@@ -30,7 +103,7 @@ td {
 .selected-day {
     background-color: #4e9845;
     color: white;
-    border-radius: 25px;
+    border-radius: 2rem;
 }
 
 .today {
@@ -54,7 +127,7 @@ td {
     padding: 10px;
     display: flex;
 }
-.arrow {
+.interval-arrow {
     font-size: 20px;
     text-align: center;
     padding-top: 5px !important;
@@ -70,6 +143,7 @@ td {
 .selected-interval > .to {
     background-color: #edf5ec;
     color: #4e9845;
+    border-radius: 2rem;
 }
 
 .unavailable-day {

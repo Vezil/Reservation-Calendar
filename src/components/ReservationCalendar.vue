@@ -1,51 +1,62 @@
 <template>
     <div class="reservation-calendar">
-        <div class="price">{{ price }}zł</div>
-
-        <div class="month-switch">
-            <div @click="changeMonth(-1)"> &#60;</div>
-            <div>{{ months[monthIndex] }} 2021</div>
-            <div @click="changeMonth(+1)"> &#62; </div>
-        </div>
-
-        <div class="selected-interval">
-            <div class="from">
-                {{
-                    dateFirstSelectedIndex === -1 ||
-                    !daysToShow[dateFirstSelectedIndex]
-                        ? '-'
-                        : formattedInterval(
-                              daysToShow[dateFirstSelectedIndex].dayNumber
-                          )
-                }}
-
-                <div class="close-button" @click="cancelInterval('first')">
-                    x
-                </div>
+        <div class="calendar-head">
+            <div class="submit-values">
+                <div class="price">{{ price }}zł</div>
+                <div class="submit-button">Reserve</div>
             </div>
-            <div class="arrow">&rarr;</div>
-            <div class="to">
-                {{
-                    dateSecondSelectedIndex === -1 ||
-                    !daysToShow[dateSecondSelectedIndex]
-                        ? '-'
-                        : formattedInterval(
-                              daysToShow[dateSecondSelectedIndex].dayNumber
-                          )
-                }}
 
-                <div class="close-button" @click="cancelInterval('second')">
-                    x
+            <div class="stars">OOOOO</div>
+
+            <div class="selected-interval">
+                <div class="from">
+                    {{
+                        dateFirstSelectedIndex === -1 ||
+                        !daysToShow[dateFirstSelectedIndex]
+                            ? '-'
+                            : formattedInterval(
+                                  daysToShow[dateFirstSelectedIndex].dayNumber
+                              )
+                    }}
+
+                    <div class="close-button" @click="cancelInterval('first')">
+                        x
+                    </div>
+                </div>
+                <div class="interval-arrow">&rarr;</div>
+                <div class="to">
+                    {{
+                        dateSecondSelectedIndex === -1 ||
+                        !daysToShow[dateSecondSelectedIndex]
+                            ? '-'
+                            : formattedInterval(
+                                  daysToShow[dateSecondSelectedIndex].dayNumber
+                              )
+                    }}
+
+                    <div class="close-button" @click="cancelInterval('second')">
+                        x
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="calendar-body">
+            <div class="month-switch">
+                <div @click="changeMonth(-1)" class="change-month-arrow">
+                    &#60;</div
+                >
+                <div class="selected-month">{{ months[monthIndex] }} 2021</div>
+                <div @click="changeMonth(+1)" class="change-month-arrow">
+                    &#62;
+                </div>
+            </div>
+
             <table class="table">
                 <tr>
                     <th v-for="(day, index) in days" :key="index">
-                        {{ day }}</th
-                    >
+                        {{ day }}
+                    </th>
                 </tr>
                 <tr v-for="index in 6" :key="index">
                     <td
