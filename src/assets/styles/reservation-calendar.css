@@ -1,21 +1,6 @@
 .reservation-calendar {
     width: 24rem;
     margin: auto;
-}
-
-.calendar-head {
-    width: 22rem;
-    margin: auto;
-    border-radius: 20px;
-    padding: 20px;
-    z-index: 2;
-
-    -webkit-box-shadow: 3px 7px 100px -28px rgba(66, 68, 90, 1);
-    -moz-box-shadow: 3px 7px 100px -28px rgba(66, 68, 90, 1);
-    box-shadow: 3px 7px 100px -28px rgba(66, 68, 90, 1);
-}
-
-.calendar-body {
     width: 20rem;
     margin: auto;
     border-radius: 20px;
@@ -25,41 +10,6 @@
     -webkit-box-shadow: 1px -1px 100px -58px rgba(66, 68, 90, 1);
     -moz-box-shadow: 1px -1px 100px -58px rgba(66, 68, 90, 1);
     box-shadow: 1px -1px 100px -58px rgba(66, 68, 90, 1);
-}
-
-.submit-values {
-    display: flex;
-    justify-content: space-between;
-}
-
-.price {
-    font-size: 32px;
-    font-weight: 900;
-    margin: 2px;
-}
-
-.submit-button {
-    background-color: #4e9845;
-    border-radius: 50px;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
-    width: 100px;
-    padding-top: 15px;
-}
-
-.stars {
-    text-align: left;
-    margin: 10px;
-    width: 50%;
-}
-
-.selected-interval {
-    border: solid 1px rgba(0, 128, 0, 0.2);
-    text-align: center;
-    margin: auto;
-    width: 20rem;
-    padding: 4px;
 }
 
 .month-switch {
@@ -115,35 +65,6 @@ td {
     background-color: #edf5ec;
     border-radius: 25px;
     color: #4e9845;
-}
-
-.selected-interval {
-    display: flex;
-    justify-content: center;
-    border-radius: 25px;
-}
-
-.selected-interval > div {
-    padding: 10px;
-    display: flex;
-}
-.interval-arrow {
-    font-size: 20px;
-    text-align: center;
-    padding-top: 5px !important;
-}
-
-.close-button {
-    margin-left: 15px;
-    cursor: pointer;
-    color: gray;
-    font-weight: 500;
-}
-
-.selected-interval > .to {
-    background-color: #edf5ec;
-    color: #4e9845;
-    border-radius: 2rem;
 }
 
 .unavailable-day {

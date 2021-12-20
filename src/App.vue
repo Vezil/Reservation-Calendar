@@ -1,30 +1,21 @@
 <template>
     <div id="app">
-        <reservation-calendar
-            :price="price"
-            :votesAmount="votesAmount"
-            :availableRange="availableRange"
-            :unavailableRange="unavailableRange"
-            :selectedRange="selectedRange"
-        />
+        <reservation-form :price="price" :votesAmount="votesAmount" />
     </div>
 </template>
 
 <script>
-import ReservationCalendar from '@/components/ReservationCalendar';
+import ReservationForm from '@/components/ReservationForm';
 
 export default {
     name: 'App',
     components: {
-        ReservationCalendar
+        ReservationForm
     },
     data() {
         return {
             price: 298,
-            votesAmount: 123,
-            availableRange: [],
-            unavailableRange: [],
-            selectedRange: []
+            votesAmount: 123
         };
     }
 };
