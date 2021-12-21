@@ -216,6 +216,16 @@ export default {
 
             this.dateSecondSelectedIndex = this.dateFirstSelectedIndex;
             this.dateFirstSelectedIndex = index;
+
+            if (
+                this.dateSecondSelectedIndex !== -1 &&
+                this.dateFirstSelectedIndex > this.dateSecondSelectedIndex
+            ) {
+                const buffor = this.dateFirstSelectedIndex;
+
+                this.dateFirstSelectedIndex = this.dateSecondSelectedIndex;
+                this.dateSecondSelectedIndex = buffor;
+            }
         },
         isSelected(dayObject) {
             if (
