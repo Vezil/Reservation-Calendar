@@ -109,6 +109,13 @@ export default {
                 this.monthIndex < 10
                     ? this.monthIndex === 0
                         ? `01`
+                        : `0${this.monthIndex}`
+                    : String(this.monthIndex);
+
+            const currentMonthNumber =
+                this.monthIndex < 10
+                    ? this.monthIndex === 0
+                        ? `01`
                         : `0${this.monthIndex + 1}`
                     : String(this.monthIndex + 1);
 
@@ -118,12 +125,16 @@ export default {
             ).daysInMonth();
 
             const firstWeekdayOfMonth = moment(
-                `2021-${previousMonthNumber}-01`
+                `2021-${currentMonthNumber}-01`
             ).weekday();
 
             if (!this.dateRange) {
                 return daysToShowArray;
             }
+
+            const startMonthIndex = moment(
+                moment(`2021-${currentMonthNumber}-01`)
+            ).dayOfYear();
 
             for (const day of this.dateRange.by('day')) {
                 daysToShowArray.push({
@@ -132,14 +143,17 @@ export default {
                 });
             }
 
+            daysToShowArray = daysToShowArray.slice(
+                startMonthIndex,
+                startMonthIndex + 42
+            );
+
             for (let i = 0; i < firstWeekdayOfMonth; i++) {
                 daysToShowArray.unshift({
                     dayNumber: daysInPreviousMonth - i,
                     available: false
                 });
             }
-
-            daysToShowArray = daysToShowArray.slice(0, 42);
 
             let i = daysToShowArray.length - 1;
 
