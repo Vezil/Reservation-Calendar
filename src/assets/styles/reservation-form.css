@@ -3,11 +3,10 @@
     margin: auto;
     border-radius: 20px;
     padding: 20px;
-    z-index: 2;
 
-    -webkit-box-shadow: 3px 7px 100px -28px rgba(66, 68, 90, 1);
-    -moz-box-shadow: 3px 7px 100px -28px rgba(66, 68, 90, 1);
-    box-shadow: 3px 7px 100px -28px rgba(66, 68, 90, 1);
+    -webkit-box-shadow: 3px 7px 100px -38px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 3px 7px 100px -38px rgba(66, 68, 90, 1);
+    box-shadow: 3px 7px 100px -38px rgba(66, 68, 90, 1);
 }
 
 .submit-values {
@@ -64,7 +63,7 @@
 }
 
 .selected-interval {
-    border: solid 1px rgba(0, 128, 0, 0.2);
+    border: solid 1px rgba(0, 128, 0, 0.4);
     text-align: center;
     margin: auto;
     width: 20rem;

@@ -5,17 +5,18 @@
     margin: auto;
     border-radius: 20px;
     padding: 20px;
-    z-index: 4;
+    margin-top: -10px;
+    background-color: white;
 
-    -webkit-box-shadow: 1px -1px 100px -58px rgba(66, 68, 90, 1);
-    -moz-box-shadow: 1px -1px 100px -58px rgba(66, 68, 90, 1);
-    box-shadow: 1px -1px 100px -58px rgba(66, 68, 90, 1);
+    -webkit-box-shadow: 3px 1px 50px -28px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 3px 1px 50px -28px rgba(66, 68, 90, 1);
+    box-shadow: 3px 1px 50px -28px rgba(66, 68, 90, 1);
 }
 
 .month-switch {
     display: flex;
     justify-content: center;
-    padding: 5px 10px 5px 10px;
+    padding: 0px 10px 0px 10px;
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 2rem;
     width: 18rem;
@@ -26,9 +27,7 @@
     font-size: 16px;
     font-weight: 700;
 }
-.selected-month {
-    /*  */
-}
+
 .change-month-arrow {
     cursor: pointer;
 }
@@ -39,6 +38,7 @@
 
 .table {
     margin: auto;
+    border-spacing: 0px;
 }
 
 tr,
@@ -50,21 +50,24 @@ td {
     cursor: pointer;
 }
 
+th {
+    color: gray;
+    font-weight: 500;
+}
+
 .selected-day {
     background-color: #4e9845;
     color: white;
-    border-radius: 2rem;
-    border-collapse: collapse;
+    border-radius: 25px;
 }
 
 .today {
-    border: 2px solid #edf5ec;
+    border: 2px solid #bbe7b5;
     border-radius: 25px;
 }
 
 .in-range {
     background-color: #edf5ec;
-    border-radius: 25px;
     color: #4e9845;
 }
 
