@@ -288,7 +288,12 @@ export default {
             this.dateSecondSelectedIndex = -1;
         },
         submit() {
-            // send data to the backend...
+            const startDate = this.daysToShow[this.dateFirstSelectedIndex];
+            const endDate = this.daysToShow[this.dateSecondSelectedIndex];
+
+            console.log({ startDate, endDate });
+
+            // send to the backend
         }
     }
 };
