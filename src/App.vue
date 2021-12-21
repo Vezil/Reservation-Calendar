@@ -1,6 +1,10 @@
 <template>
     <div id="app">
-        <reservation-form :price="price" :votesAmount="votesAmount" />
+        <reservation-form
+            :price="price"
+            :votesAmount="votesAmount"
+            :stars="stars"
+        />
     </div>
 </template>
 
@@ -15,7 +19,8 @@ export default {
     data() {
         return {
             price: 298,
-            votesAmount: 123
+            votesAmount: 123,
+            stars: 3.5
         };
     }
 };

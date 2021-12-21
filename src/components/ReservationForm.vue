@@ -6,7 +6,30 @@
                 <div class="submit-button" @click="submit">Reserve</div>
             </div>
 
-            <div class="stars">OOOOO</div>
+            <div class="votes">
+                <div class="stars"
+                    ><span
+                        v-for="(star, index) in parseInt(stars)"
+                        :key="`active-${index}`"
+                        class="active-stars"
+                    >
+                        &#9733;
+                    </span>
+
+                    <span v-if="isHalfStar" class="half-star"> &#10032; </span>
+
+                    <span
+                        v-for="(star, index) in isHalfStar
+                            ? 4 - parseInt(stars)
+                            : 5 - parseInt(stars)"
+                        :key="`inactive-${index}`"
+                        class="inactive-stars"
+                    >
+                        &#10032;
+                    </span>
+                </div>
+                <div class="votes-amount">{{ votesAmount }}</div>
+            </div>
 
             <div class="selected-interval">
                 <div class="from">
@@ -72,6 +95,10 @@ export default {
         votesAmount: {
             type: Number,
             required: true
+        },
+        stars: {
+            type: Number,
+            required: true
         }
     },
     computed: {
@@ -125,6 +152,9 @@ export default {
             }
 
             return daysToShowArray;
+        },
+        isHalfStar() {
+            return !Number.isInteger(this.stars);
         }
     },
     data() {

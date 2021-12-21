@@ -31,10 +31,36 @@
     padding-top: 15px;
 }
 
+.votes {
+    margin: 10px;
+    display: flex;
+    align-items: start;
+    color: gray;
+    font-size: 15px;
+    font-weight: 700;
+}
+
 .stars {
     text-align: left;
-    margin: 10px;
-    width: 50%;
+    width: 26%;
+    font-size: 19px;
+    display: inline-block;
+    letter-spacing: -3px;
+}
+
+.active-stars {
+    color: green;
+}
+
+.half-star::before {
+    content: '\2605';
+    color: green;
+    position: absolute;
+    width: 8px;
+    overflow: hidden;
+}
+.votes-amount {
+    margin-top: 5px;
 }
 
 .selected-interval {
