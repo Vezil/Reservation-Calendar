@@ -136,9 +136,8 @@ export default {
                 return daysToShowArray;
             }
 
-            const startMonthIndex = moment(
-                `2021-${currentMonthNumber}-01`
-            ).dayOfYear();
+            const startMonthIndex =
+                moment(`2021-${currentMonthNumber}-01`).dayOfYear() - 1;
 
             for (const day of this.dateRange.by('day')) {
                 daysToShowArray.push({
