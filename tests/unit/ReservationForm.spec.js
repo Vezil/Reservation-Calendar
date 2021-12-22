@@ -7,7 +7,8 @@ describe('ReservationForm', () => {
             propsData: {
                 price: 298,
                 votesAmount: 123,
-                stars: 3.5
+                stars: 3.5,
+                unavailableDays: []
             }
         });
 

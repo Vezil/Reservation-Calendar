@@ -99,6 +99,10 @@ export default {
         stars: {
             type: Number,
             required: true
+        },
+        unavailableDays: {
+            type: Array,
+            required: true
         }
     },
     computed: {
@@ -133,7 +137,7 @@ export default {
             }
 
             const startMonthIndex = moment(
-                moment(`2021-${currentMonthNumber}-01`)
+                `2021-${currentMonthNumber}-01`
             ).dayOfYear();
 
             for (const day of this.dateRange.by('day')) {
@@ -142,6 +146,12 @@ export default {
                     available: true
                 });
             }
+
+            this.unavailableDays.forEach((unavailableDay) => {
+                const dayIndex = moment(unavailableDay).dayOfYear() - 1;
+
+                daysToShowArray[dayIndex].available = false;
+            });
 
             daysToShowArray = daysToShowArray.slice(
                 startMonthIndex,
@@ -192,10 +202,7 @@ export default {
             dateRange: null,
             dateFirstSelectedIndex: 16,
             dateSecondSelectedIndex: 24,
-            numOfColumns: 7,
-            availableRange: [],
-            unavailableRange: [],
-            selectedRange: []
+            numOfColumns: 7
         };
     },
     mounted() {

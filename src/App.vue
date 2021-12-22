@@ -4,6 +4,7 @@
             :price="price"
             :votesAmount="votesAmount"
             :stars="stars"
+            :unavailableDays="unavailableDays"
         />
     </div>
 </template>
@@ -20,7 +21,8 @@ export default {
         return {
             price: 298,
             votesAmount: 123,
-            stars: 3.5
+            stars: 3.5,
+            unavailableDays: ['2021-01-06', '2021-01-07']
         };
     }
 };
