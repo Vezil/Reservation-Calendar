@@ -1,6 +1,6 @@
 # reservation-calendar
 
-# DEMO : https://reservation-calendar.netlify.app/
+## DEMO : https://reservation-calendar.netlify.app/
 
 ## Project setup
 
