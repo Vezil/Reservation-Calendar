@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import ReservationCalendar from '@/components/ReservationCalendar';
 
 const defaultProps = {
@@ -40,5 +40,15 @@ describe('ReservationCalendar', () => {
         const { dateFirstSelectedIndex, dateSecondSelectedIndex } = wrapper.vm;
 
         expect(dateSecondSelectedIndex).toBeGreaterThan(dateFirstSelectedIndex);
+    });
+
+    it('checking if change month is emited successfully', () => {
+        const wrapper = mount(ReservationCalendar, {
+            propsData: defaultProps
+        });
+
+        wrapper.vm.$emit('changeMonth', +1);
+
+        expect(wrapper.emitted().changeMonth).toBeTruthy();
     });
 });

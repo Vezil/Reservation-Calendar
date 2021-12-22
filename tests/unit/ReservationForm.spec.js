@@ -22,8 +22,6 @@ describe('ReservationForm', () => {
             propsData: defaultProps
         });
 
-        console.log(wrapper.vm.dateSecondSelectedIndex, 'STATE 1');
-
         const closeButton = wrapper.find('.close-button');
 
         closeButton.trigger('click');
