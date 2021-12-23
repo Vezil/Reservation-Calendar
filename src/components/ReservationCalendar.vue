@@ -2,8 +2,8 @@
     <div class="reservation-calendar">
         <div class="month-switch">
             <div @click="changeMonth(-1)" class="change-month-arrow">
-                &#60;</div
-            >
+                &#60;
+            </div>
             <div class="selected-month">{{ months[monthIndex] }} 2021</div>
             <div @click="changeMonth(+1)" class="change-month-arrow">
                 &#62;

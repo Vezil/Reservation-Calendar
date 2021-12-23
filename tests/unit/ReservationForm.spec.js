@@ -17,7 +17,7 @@ describe('ReservationForm', () => {
         expect(wrapper.classes()).toContain('reservation-form');
     });
 
-    it('removes selected date range', () => {
+    it('checking if removing the selected date range is doing correctly', () => {
         const wrapper = shallowMount(ReservationForm, {
             propsData: defaultProps
         });
@@ -30,5 +30,21 @@ describe('ReservationForm', () => {
 
         expect(dateFirstSelectedIndex).toEqual(-1);
         expect(dateSecondSelectedIndex).toEqual(-1);
+    });
+
+    it('checking if unavailable days are applying correctly', () => {
+        const testingDayNumber = 30;
+
+        defaultProps.unavailableDays.push(`2021-01-${testingDayNumber}`);
+
+        const wrapper = shallowMount(ReservationForm, {
+            propsData: defaultProps
+        });
+
+        const { available } = wrapper.vm.daysToShow.find(
+            ({ dayNumber }) => dayNumber === testingDayNumber
+        );
+
+        expect(available).toEqual(false);
     });
 });

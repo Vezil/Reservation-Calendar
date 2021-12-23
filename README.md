@@ -20,10 +20,10 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
+### Unit Testing
 
 ```
-npm run lint
+npm run test:unit
 ```
 
 ### Customize configuration
